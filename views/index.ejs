@@ -1,0 +1,28 @@
+<%- include ('partials/header.ejs') %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Finder</title>
+    
+</head>
+<body>
+    <h1> Quote Finder </h1>
+    <form action = "/authorSearch"> 
+        <select name = "authorId"> 
+        <option>Select Author</option>
+        <% for (i of authors) { %>
+          <option value =<%=i.authorId%>> <%= i.firstName%> <%=i.lastName%> </option>
+          <br>
+        <% } %>
+        </select>
+        <button> Search by Author </button>
+    </form>
+
+    <form action = "/keywordSearch">
+        <input placeholder = "Type here..." name="keyword">
+        <button> Search by Keyword </button>
+    </form>
+
+</body>
+</html>

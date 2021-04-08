@@ -1,0 +1,16 @@
+<%- include ('partials/header.ejs') %>
+<html>
+<head>
+<title>Quote Finder</title>
+</head>
+
+<body>
+  <h1> Quotes found </h1>
+  <% for (i of quotes) { %>
+    <%= i.quote %>
+    <br>
+  <% } %>
+
+</body>
+
+</html>
