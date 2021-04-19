@@ -1,28 +1,53 @@
-<%- include ('partials/header.ejs') %>
+<%- include('partials/header.ejs')  %>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quote Finder</title>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Finder</title>
+    <!-- CSS only -->
+
 </head>
+
 <body>
-    <h1> Quote Finder </h1>
-    <form action = "/authorSearch"> 
-        <select name = "authorId"> 
-        <option>Select Author</option>
-        <% for (i of authors) { %>
-          <option value =<%=i.authorId%>> <%= i.firstName%> <%=i.lastName%> </option>
-          <br>
-        <% } %>
-        </select>
-        <button> Search by Author </button>
+  <header><h1> Quote Finder </h1></header>
+
+  <div>
+    <form action="/searchByAuthor">
+      <select name = "authorId"> 
+          <option>Select Author</option>
+          <% for (i of authors) { %>
+            <option value =<%=i.authorId%>> <%=i.firstName%> <%=i.lastName%> </option>
+            <br>
+          <% } %>
+          </select>
+      <button class="btn btn-dark">Search By Author</button>
     </form>
 
-    <form action = "/keywordSearch">
-        <input placeholder = "Type here..." name="keyword">
-        <button> Search by Keyword </button>
-    </form>
+    <br>
 
+    <form action="/searchByKeyword">
+      Keyword: <input type="text" name="word">
+      <button class="btn btn-dark">Search By Keyword</button>
+    </form>
+    <br>
+    <form action="/searchByLikes">
+      Min: <input type="number" name="min">
+      Max: <input type="number" name="max">
+      <button class="btn btn-dark">Search By Likes</button>
+    </form>
+    <br>
+    <form action = "/searchCategory">
+    <select name="category">
+    <option> Select one </option>
+    <% for (i of category) { %>
+    <option value="<%=i.category%>"><%=i.category%></option>
+    <% } %>
+    </select>
+    <button class="btn btn-dark">Search by Category</button>
+    </form>
+    
+  </div>
 </body>
+
 </html>

@@ -1,3 +1,21 @@
-form, h1, body {
-    text-align:center;
+body {
+  background-color: lightBlue;
+  text-align: center;
+}
+
+div {
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+h1 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+img {
+  width: 20%;
+  height: 20%;
 }

@@ -1,16 +1,59 @@
-<%- include ('partials/header.ejs') %>
-<html>
+<%- include('partials/header.ejs')  %>
+<html lang="en">
 <head>
-<title>Quote Finder</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Finder</title>
 </head>
-
 <body>
-  <h1> Quotes found </h1>
+
+  <h1> Quotes Found </h1>
+  <form action = "/">
+  <button> Home </button>
+  </form>
+  <br><br>
   <% for (i of quotes) { %>
-    <%= i.quote %>
-    <br>
+    <%= i.quote %> <br>
+    <em>~<a authorId="<%= i.authorId %>" class="authorLink"
+    href="#"> <%= i.firstName%> <%= i.lastName %> </a>
+    </em> 
+    <br><br>
   <% } %>
 
-</body>
+  <!-- Modal -->
+  <div class="modal fade" id="authorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Author Info</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="authorInfo"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    $(".authorLink").on("click", displayAuthorInfo);
+
+    async function displayAuthorInfo() {
+      var myModal = new bootstrap.Modal(document.getElementById('authorModal'));
+      myModal.show();
+
+      let authorId = $(this).attr("authorId");
+      let url = `/api/getAuthorInfo?authorId=${authorId}`;
+      let response = await fetch(url);
+      let data = await response.json();
+
+      $("#authorInfo").html(`${data[0].firstName} ${data[0].lastName}<br>`);
+      $("#authorInfo").append(data[0].biography);
+    }
+  </script>
+
+</body>
 </html>
